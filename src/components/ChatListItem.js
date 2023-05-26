@@ -7,7 +7,7 @@ export default () => {
             <img className="chatListitem-avatar" src="https://www.w3schools.com/howto/img_avatar.png" />
             <div className="chatListitem-lines">
                 <div className="chatListitem-line">
-                    <div className="chatListitem-name">""</div>
+                    <div className="chatListitem-name">"João"</div>
                     <div className="chatListitem-date">"15:40"</div>
                 </div>
                 <div className="chatListitem-line">
