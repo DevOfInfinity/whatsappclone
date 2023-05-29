@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChatListItem from './components/ChatListItem';
-import Chatintro from './components/Chatintro';
+import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -61,7 +61,7 @@ export default () => {
         {activeChat.chatId !== undefined ? (
           <ChatWindow />
         ) : (
-          <Chatintro />
+          <ChatIntro />
         )}
       </div>
     </div>

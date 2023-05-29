@@ -1,4 +1,5 @@
 import React from "react";
+import EmojiPicker from "emoji-picker-react";
 import './ChatWindow.css'
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,6 +14,11 @@ import MicRoundedIcon from '@mui/icons-material/MicRounded';
 
 
 export default () => {
+
+    // const handleEmojiClick = () {
+
+    // }
+
     return (
         <div className="chatWindow">
             <div className="chatWindow-header">
@@ -38,10 +44,21 @@ export default () => {
             <div className="chatWindow-body">
 
             </div>
+
+            <div className="chatWindow-emojiarea">
+                <EmojiPicker
+                    // onEmojiClick={handleEmojiClick}
+                    searchDisabled
+                    SkinTonerPickerdisable
+                />
+            </div>
+
             <div className="chatWindow-footer">
 
                 <div className="chatWindow-pre">
-
+                    <div className="chatWindow-btn">
+                        <CloseRoundedIcon style={{ color: '#919191' }} />
+                    </div>
                     <div className="chatWindow-btn">
                         <MoodRoundedIcon style={{ color: '#919191' }} />
                     </div>

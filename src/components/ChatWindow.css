@@ -89,3 +89,8 @@
     display: flex;
     margin: 0 15px;
 }
+
+aside {
+    width: auto !important;
+    background: none;
+}
