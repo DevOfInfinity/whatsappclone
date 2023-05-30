@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import './ChatWindow.css'
 
@@ -15,9 +15,50 @@ import MicRoundedIcon from '@mui/icons-material/MicRounded';
 
 export default () => {
 
-    // const handleEmojiClick = () {
+    let recognition = null
+    let SpeechRecognition = window.SpeechRecohnition || window.webkitSpeechRecognition
+    if (SpeechRecognition !== undefined) {
+        recognition = new SpeechRecognition()
+    }
 
-    // }
+    const [emojiOpen, setEmojiOpen] = useState(false)
+    const [text, setText] = useState('')
+    const [listening, setListening] = useState(false)
+
+    const handleEmojiClick = (e) => {
+        setText(text + e.emoji)
+    }
+
+    const handleOpenEmoji = () => {
+        setEmojiOpen(true)
+    }
+
+    const handleCloseEmoji = () => {
+        setEmojiOpen(false)
+    }
+
+    const handleSendClick = () => {
+
+    }
+
+    const handleMicClick = () => {
+        if (recognition !== null) {
+
+            recognition.onend = () => {
+                setListening(true)
+            }
+            recognition.onstart = () => {
+                setListening(false)
+            }
+            recognition.onresult = (e) => {
+                setText(e.results[0][0].transcript)
+            }
+
+            recognition.start()
+
+        }
+    }
+
 
     return (
         <div className="chatWindow">
@@ -45,9 +86,10 @@ export default () => {
 
             </div>
 
-            <div className="chatWindow-emojiarea">
+            <div className="chatWindow-emojiarea"
+                style={{ height: emojiOpen ? '200px' : '0px' }}>
                 <EmojiPicker
-                    // onEmojiClick={handleEmojiClick}
+                    onEmojiClick={handleEmojiClick}
                     searchDisabled
                     SkinTonerPickerdisable
                 />
@@ -56,11 +98,19 @@ export default () => {
             <div className="chatWindow-footer">
 
                 <div className="chatWindow-pre">
-                    <div className="chatWindow-btn">
+
+                    <div
+                        className="chatWindow-btn"
+                        onClick={handleCloseEmoji}
+                        style={{ width: emojiOpen ? 40 : 0 }}
+                    >
                         <CloseRoundedIcon style={{ color: '#919191' }} />
                     </div>
-                    <div className="chatWindow-btn">
-                        <MoodRoundedIcon style={{ color: '#919191' }} />
+                    <div
+                        className="chatWindow-btn"
+                        onClick={handleOpenEmoji}
+                    >
+                        <MoodRoundedIcon style={{ color: emojiOpen ? '#009688' : '#919191' }} />
                     </div>
                 </div>
 
@@ -69,13 +119,25 @@ export default () => {
                         className="chatWindow-input"
                         type='text'
                         placeholder="Digite uma mensagem"
+                        value={text}
+                        onChange={e => setText(e.target.value)}
                     />
                 </div>
 
                 <div className="chatWindow-pos">
-                    <div className="chatWindow-btn">
-                        <SendRoundedIcon style={{ color: '#919191' }} />
-                    </div>
+
+                    {text === '' &&
+                        <div onClick={handleMicClick} className="chatWindow-btn">
+                            <MicRoundedIcon style={{ color: listening ? '#126ECE' : '#919191' }} />
+
+                        </div>
+                    }
+
+                    {text !== '' &&
+                        <div onClick={handleSendClick} className="chatWindow-btn">
+                            <SendRoundedIcon style={{ color: '#919191' }} />
+                        </div>
+                    }
                 </div>
             </div>
         </div>
