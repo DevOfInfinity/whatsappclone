@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
 import './ChatWindow.css'
 
@@ -15,7 +15,9 @@ import MicRoundedIcon from '@mui/icons-material/MicRounded';
 
 
 
-export default () => {
+export default ({ user }) => {
+
+    const body = useRef()
 
     let recognition = null
     let SpeechRecognition = window.SpeechRecohnition || window.webkitSpeechRecognition
@@ -26,8 +28,29 @@ export default () => {
     const [emojiOpen, setEmojiOpen] = useState(false)
     const [text, setText] = useState('')
     const [listening, setListening] = useState(false)
-    const [list, setList] = useState([])
+    const [list, setList] = useState([
+        { author: 123, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 1234, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 1234, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 1234, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 1234, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 123, body: ' A B C' },
+        { author: 1234, body: ' A B C' },
+    ])
 
+    useEffect(() => {
+        if (body.current.scrollHeight > body.current.offsetHeight) {
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+        }
+    }, [list])
 
     const handleEmojiClick = (e) => {
         setText(text + e.emoji)
@@ -85,11 +108,12 @@ export default () => {
                 </div>
 
             </div>
-            <div className="chatWindow-body">
+            <div ref={body} className="chatWindow-body">
                 {list.map((item, key) => (
                     <MessageItem
                         key={key}
                         data={item}
+                        user={user}
                     />
                 ))}
             </div>
