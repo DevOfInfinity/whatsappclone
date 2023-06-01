@@ -42,7 +42,6 @@ export default () => {
       name: u.displayName,
       avatar: u.photoURL
     }
-
     setUser(newUser)
 
   }

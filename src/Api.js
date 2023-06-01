@@ -1,17 +1,15 @@
-import firebase from 'firebase/app';
-import 'firebase/firebase-auth';
-import 'firebase/firebase-firestore';
-
-
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
-const db = firebaseApp.firestore()
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 export default {
     fbPopup: async () => {
-        const provider = new firebase.auth.FacebookAuthProvider()
-        let result = await firebaseApp.auth().signInWithPopup(provider)
-        return result
-    }
-}
+        const provider = new FacebookAuthProvider();
+        let result = await signInWithPopup(getAuth(firebaseApp), provider);
+        return result;
+    },
+};
