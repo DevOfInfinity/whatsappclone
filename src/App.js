@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import './App.css';
+
+
 import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
+import NewChat from './components/NewChat';
+
+
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
-
-import chatData from './chatData'; // Importar dados de exemplo de um arquivo separado
-import './App.css';
 
 export default () => {
   const [chatlist, setChatlist] = useState([
@@ -35,6 +38,9 @@ export default () => {
   return (
     <div className="app-window">
       <div className="sidebar">
+
+        <NewChat />
+
         <header>
           <img className="header-avatar" src="{user.avatar}" alt="" />
           <div className="header-buttons">
