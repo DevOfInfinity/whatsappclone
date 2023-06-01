@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid #DDD;
+    transition: all ease 0.5s;
 }
 
 .newChat-head {
@@ -55,8 +56,12 @@
 .newChat-item {
     display: flex;
     align-items: center;
-    border-radius: 50%;
     margin-right: 15px;
+    cursor: pointer
+}
+
+.newChat-item:hover {
+    background-color: #F5F5F5;
 }
 
 .newChat-itemavatar {
@@ -68,5 +73,5 @@
 
 .newChat-itemname {
     font-size: 17px;
-    color: black;
+    color: #000;
 }

@@ -3,7 +3,7 @@ import './NewChat.css'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-export default () => {
+export default ({ user, chatlist, show, setShow }) => {
 
     const [list, setList] = useState([
         { id: 123, avatar: 'https://www.w3schools.com/howto/img_avatar.png', name: 'João Nascimento' },
@@ -12,10 +12,14 @@ export default () => {
         { id: 123, avatar: 'https://www.w3schools.com/howto/img_avatar.png', name: 'João Nascimento' }
     ])
 
+    const handleClose = () => {
+        setShow(false)
+    }
+
     return (
-        <div div className="newChat" >
+        <div div className="newChat" style={{ left: show ? 0 : -415 }}>
             <div className="newChat-head">
-                <div className="newChat-backbutton">
+                <div onClick={handleClose} className="newChat-backbutton">
                     <ArrowBackIcon style={{ color: '#FFFFFF' }} />
                 </div>
                 <div className="newChat-headtitle">Nova conversa

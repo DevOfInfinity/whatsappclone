@@ -34,24 +34,34 @@ export default () => {
     avatar: 'https://www.w3schools.com/howto/img_avatar.png',
     name: 'João Nascimento'
   })
+  const [showNewChat, setShowNewChat] = useState(false)
+
+  const handleNewChat = () => {
+    setShowNewChat(true)
+  }
 
   return (
     <div className="app-window">
       <div className="sidebar">
 
-        <NewChat />
+        <NewChat
+          chatlist={chatlist}
+          user={user}
+          show={showNewChat}
+          setShow={setShowNewChat}
+        />
 
         <header>
-          <img className="header-avatar" src="{user.avatar}" alt="" />
+          <img className="header-avatar" src={user.avatar} alt="" />
           <div className="header-buttons">
             <div className="header-btn">
-              <DonutLargeIcon />
+              <DonutLargeIcon style={{ color: '#919191' }} />
+            </div>
+            <div onClick={handleNewChat} className="header-btn">
+              <ChatIcon style={{ color: '#919191' }} />
             </div>
             <div className="header-btn">
-              <ChatIcon />
-            </div>
-            <div className="header-btn">
-              <MoreVertIcon />
+              <MoreVertIcon style={{ color: '#919191' }} />
             </div>
           </div>
         </header>
